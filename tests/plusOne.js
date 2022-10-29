@@ -33,7 +33,21 @@ test("Very long test", async () => {
     await new Promise(resolve => {
         setTimeout(() => {
             resolve(20)
-        }, 5000)
+        }, 2500)
+    }).then(int => x = int)
+
+    expect(x).toBe(201);
+})
+
+test("Async test with error", async () => {
+    let x = 10;
+
+    await new Promise(resolve => {
+        throw new Error("Wrong!");
+
+        setTimeout(() => {
+            resolve(20)
+        }, 2500)
     }).then(int => x = int)
 
     expect(x).toBe(201);
