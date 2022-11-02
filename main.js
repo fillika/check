@@ -6,7 +6,7 @@ const startButton = document.getElementById("start-button");
 startButton.addEventListener("click", () => {
     root.innerHTML = "";
     startButton.setAttribute("disabled", "true");
-    const { StateManager } = window.checkLib;
+    const { StateManager } = window;
 
     const promises = StateManager.runTests();
 
