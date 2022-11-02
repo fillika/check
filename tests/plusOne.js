@@ -8,6 +8,14 @@ test("Alone test without group", () => {
     expect(result).not.toBe(int);
 })
 
+test("Another alone test without group", () => {
+    const int = 100,
+        result = plusOne(int);
+
+    expect(result).toBe(101);
+    expect(result).not.toBe(101);
+})
+
 group(
     "Test [plusOne] function with correct result",
     () => {
