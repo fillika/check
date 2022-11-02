@@ -6,16 +6,16 @@ const startButton = document.getElementById("start-button");
 startButton.addEventListener("click", () => {
     root.innerHTML = "";
     startButton.setAttribute("disabled", "true");
-    window.checkLib.state.reset();
+    const { StateManager } = window.checkLib;
 
-    const promises = window.checkLib.state.tests.map(p => p.run());
+    const promises = StateManager.runTests();
 
     for (const promise of promises) {
         promise.then(test => insertResultToDOM(root, renderTestResult(test)))
     }
 
     Promise.allSettled(promises).then(results => {
-        const { success, total, fail } = window.checkLib.state.information.tests
+        const { tests: { success, total, fail } } = StateManager.getReport();
         root.insertAdjacentElement("afterbegin", createStatisticBillboard(success, fail, total))
         startButton.removeAttribute("disabled");
     })
