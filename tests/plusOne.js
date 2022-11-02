@@ -1,54 +1,72 @@
 import { plusOne } from "../functions";
 
-test("use function [plusOne] with number 34", () => {
-    const int = 34,
-        result = plusOne(int);
-
-    expect(result).toBe(35);
-    expect(result).not.toBe(int);
-})
-
-test("use function [plusOne] with number 121", () => {
-    const int = 121,
-        result = plusOne(int);
-
-    expect(result).toBe(122);
-    expect(result).not.toBe(int);
-})
-
-test("Incorrect test", () => {
+test("Alone test without group", () => {
     const int = 1,
         result = plusOne(int);
 
-    expect(result).toBe(int);
+    expect(result).toBe(2);
+    expect(result).not.toBe(int);
 })
 
-test("Test with Error", () => {
-    throw new Error("My custom error");
-})
+group(
+    "Test [plusOne] function with correct result",
+    () => {
+        test("use function [plusOne] with number 34", () => {
+            const int = 34,
+                result = plusOne(int);
 
-test("Very long test", async () => {
-    let x = 10;
+            expect(result).toBe(35);
+            expect(result).not.toBe(int);
+        })
 
-    await new Promise(resolve => {
-        setTimeout(() => {
-            resolve(20)
-        }, 2500)
-    }).then(int => x = int)
+        test("use function [plusOne] with number 121", () => {
+            const int = 121,
+                result = plusOne(int);
 
-    expect(x).toBe(201);
-})
+            expect(result).toBe(122);
+            expect(result).not.toBe(int);
+        })
 
-test("Async test with error", async () => {
-    let x = 10;
+        test("Very long test", async () => {
+            let x = 10;
 
-    await new Promise(resolve => {
-        throw new Error("Wrong!");
+            await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(20)
+                }, 2500)
+            }).then(int => x = int)
 
-        setTimeout(() => {
-            resolve(20)
-        }, 2500)
-    }).then(int => x = int)
+            expect(x).toBe(201);
+        })
+    },
+)
 
-    expect(x).toBe(201);
-})
+group(
+    "Test [plusOne] function with ERROR",
+    () => {
+        test("Incorrect test", () => {
+            const int = 1,
+                result = plusOne(int);
+
+            expect(result).toBe(int);
+        })
+
+        test("Test with Error", () => {
+            throw new Error("My custom error");
+        })
+
+        test("Async test with error", async () => {
+            let x = 10;
+
+            await new Promise(resolve => {
+                throw new Error("Wrong!");
+
+                setTimeout(() => {
+                    resolve(20)
+                }, 2500)
+            }).then(int => x = int)
+
+            expect(x).toBe(201);
+        })
+    }
+)

@@ -2,6 +2,7 @@ import { renderTestResult, insertResultToDOM, createStatisticBillboard } from ".
 
 const root = document.getElementById("root");
 const startButton = document.getElementById("start-button");
+const testsGroup = StateManager.getTestsGroup();
 
 startButton.addEventListener("click", () => {
     root.innerHTML = "";
