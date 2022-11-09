@@ -78,3 +78,21 @@ group(
         })
     }
 )
+
+group(
+    "Test with same group",
+    () => {
+        test("John", () => {
+            expect(2).toBe(2)
+        })
+    }
+)
+
+group(
+    "Test with same group",
+    () => {
+        test("Doe", () => {
+            expect(3).toBe(3)
+        })
+    }
+)
