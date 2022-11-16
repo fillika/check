@@ -5,6 +5,7 @@ class TestObject implements ITestObject {
     _id: string;
     _name: string;
     _result: boolean;
+    _groupName: string | null;
     _callback: CallbackInTestObject;
 
     constructor(id: string, name: string, callback: CallbackInTestObject) {
@@ -12,16 +13,26 @@ class TestObject implements ITestObject {
         this._name = name;
         this._result = false;
         this._callback = callback;
+        this._groupName = null;
 
-        StateManager.trigger("addTest", this._id);
+        StateManager.trigger("addTest", this._id, this);
+    }
+
+    get name() {
+        return this._name;
     }
 
     get result() {
         return this._result;
     }
 
-    get name() {
-        return this._name;
+    get groupName() {
+        return this._groupName;
+    }
+
+    setGroupName(groupName: string) {
+        if (typeof groupName !== "string") groupName = null;
+        this._groupName = groupName;
     }
 
     run() {

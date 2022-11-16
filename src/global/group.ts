@@ -3,7 +3,10 @@ import StateManager from "../utils/StateManager";
 function group(name: string, cb: () => void) {
     StateManager.on(
         "addTest",
-        (id: string) => StateManager.setTestToTheGroup(name, id),
+        (id: string, test: ITestObject) => {
+            StateManager.setTestToTheGroup(name, id);
+            test.setGroupName(name);
+        },
     );
 
     cb();
