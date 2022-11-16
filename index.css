@@ -1,0 +1,9 @@
+.group-result {
+    margin-bottom: 10px;
+    padding-left: 15px;
+}
+
+.group-result__title {
+    margin-left: -15px;
+    margin-bottom: 5px;
+}

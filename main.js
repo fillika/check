@@ -3,6 +3,7 @@ import {
     renderTestResult,
     insertResultToDOM,
     createStatisticBillboard,
+    createResultGroup,
 } from "./render";
 
 const { StateManager } = window;
@@ -54,11 +55,19 @@ startButton.addEventListener("click", () => {
 
     const promises = StateManager.runTests(testIDs);
 
-    for (const promise of promises) {
-        promise.then(test => insertResultToDOM(root, renderTestResult(test)))
-    }
-
     Promise.allSettled(promises).then(results => {
+        for (const { value } of results) {
+            const groupName = value.groupName === null ? "no-group" : value.groupName;
+            let target = document.querySelector(`div[data-id="${groupName}"]`);
+
+            if (target === null) {
+                insertResultToDOM(root, createResultGroup(groupName));
+                target = document.querySelector(`div[data-id="${groupName}"]`);
+            }
+
+            target.insertAdjacentElement("beforeend", renderTestResult(value))
+        }
+
         const { tests: { success, total, fail } } = StateManager.getReport();
         root.insertAdjacentElement("afterbegin", createStatisticBillboard(success, fail, total))
         startButton.removeAttribute("disabled");
