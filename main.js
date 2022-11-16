@@ -1,9 +1,7 @@
 import {
     createFieldSet,
-    renderTestResult,
-    insertResultToDOM,
     createStatisticBillboard,
-    createResultGroup,
+    renderResults,
 } from "./render";
 
 const { StateManager } = window;
@@ -56,17 +54,7 @@ startButton.addEventListener("click", () => {
     const promises = StateManager.runTests(testIDs);
 
     Promise.allSettled(promises).then(results => {
-        for (const { value } of results) {
-            const groupName = value.groupName === null ? "no-group" : value.groupName;
-            let target = document.querySelector(`div[data-id="${groupName}"]`);
-
-            if (target === null) {
-                insertResultToDOM(root, createResultGroup(groupName));
-                target = document.querySelector(`div[data-id="${groupName}"]`);
-            }
-
-            target.insertAdjacentElement("beforeend", renderTestResult(value))
-        }
+        renderResults(results);
 
         const { tests: { success, total, fail } } = StateManager.getReport();
         root.insertAdjacentElement("afterbegin", createStatisticBillboard(success, fail, total))
