@@ -16,6 +16,27 @@ test("Another alone test without group", () => {
     expect(result).not.toBe(101);
 })
 
+test("Test with object as argument", () => {
+    const a = {
+            user: "John",
+            age: 25,
+        },
+        b = {
+            user: "Doe",
+            age: 24,
+        };
+
+    expect(a).toEqual(b);
+})
+
+test("Test with array as argument", () => {
+    const a = [1, 2, 3],
+        b = [1, 2, 3];
+
+    expect(a).toEqual(b);
+    expect(a).not.toEqual(b);
+})
+
 group(
     "Test [plusOne] function with correct result",
     () => {
@@ -76,7 +97,7 @@ group(
 
             expect(x).toBe(201);
         })
-    }
+    },
 )
 
 group(
@@ -85,7 +106,7 @@ group(
         test("John", () => {
             expect(2).toBe(2)
         })
-    }
+    },
 )
 
 group(
@@ -94,5 +115,5 @@ group(
         test("Doe", () => {
             expect(3).toBe(3)
         })
-    }
+    },
 )

@@ -15,7 +15,8 @@ class Comparator implements IComparator {
                 if (self.param === arg) error(`expect(${self.param}).not.toBe(${arg})`);
             },
             toEqual(arg: any) {
-                if (self.deepEqual(self.param, arg)) error(`expect(${self.param}).not.toEqual(${arg})`);
+                if (self.deepEqual(self.param, arg))
+                    error(`expect(${JSON.stringify(self.param)}).not.toEqual(${JSON.stringify(arg)})`);
             },
             toBeNull() {
                 if (self.param === null) error(`expect(${self.param}).not.toBeNull()`);
@@ -101,7 +102,8 @@ class Comparator implements IComparator {
 
     // deep equal
     toEqual(arg: any) {
-        if (!this.deepEqual(this.param, arg)) error(`expect(${this.param}).toEqual(${arg})`);
+        if (!this.deepEqual(this.param, arg))
+            error(`expect(${JSON.stringify(this.param)}).toEqual(${JSON.stringify(arg)})`);
     }
 
     toBeNull() {
