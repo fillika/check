@@ -5,6 +5,8 @@ import {
     createStatisticBillboard,
 } from "./render";
 
+const { StateManager } = window;
+
 const root = document.getElementById("root");
 const testUI = document.getElementById("test-ui");
 const startButton = document.getElementById("start-button");
