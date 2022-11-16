@@ -1,22 +1,18 @@
-import State from "./State.js";
-import Observer from "./Observer.js";
+import State from "./State";
+import Observer from "./Observer";
 
-class StateManager extends Observer {
-    constructor(state) {
+class StateManager extends Observer implements IStateManager {
+    _state: IState;
+
+    constructor(state: IState) {
         super();
         this._state = state;
     }
 
-    /**
-     * @param id
-     */
-    getTestByID(id) {
+    getTestByID(id: string) {
         return this._state.tests.get(id);
     }
 
-    /**
-     * @return {Map<string, string[]>}
-     */
     getTestsGroup() {
         const tests = new Map(this._state.tests),
             groups = new Map(this._state.groups),
@@ -41,7 +37,7 @@ class StateManager extends Observer {
         return result;
     }
 
-    setTestToTheGroup(groupName, testID) {
+    setTestToTheGroup(groupName: string, testID: string) {
         if (!this._state.groups.has(groupName)) {
             this._state.groups.set(groupName, []);
         }
@@ -50,18 +46,11 @@ class StateManager extends Observer {
         this._state.groups.set(groupName, arrayWithTestIDs.concat(testID));
     }
 
-    /**
-     * @return {{tests: {fail: number, total: number, success: number}}}
-     */
     getReport() {
         return this._state.report;
     }
 
-    /**
-     * @param {string[]} arrayWithTestIDs
-     * @return {Promise<TestObject>[]}
-     */
-    runTests(arrayWithTestIDs = []) {
+    runTests(arrayWithTestIDs: string[] = []) {
         this._state.resetReport();
         let tests = [];
 
@@ -84,7 +73,7 @@ class StateManager extends Observer {
         return tests.map(testObj => testObj.run());
     }
 
-    addTest(name, test) {
+    addTest(name: string, test: ITestObject) {
         this._state.add(name, test);
     }
 

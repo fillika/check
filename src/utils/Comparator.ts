@@ -1,8 +1,9 @@
-// todo
-// create TestError extends Error
+// todo create TestError extends Error
 
-class Comparator {
-    constructor(param) {
+class Comparator implements IComparator {
+    param: any;
+
+    constructor(param: any) {
         this.param = param;
     }
 
@@ -10,10 +11,10 @@ class Comparator {
         const self = this;
 
         return {
-            toBe(arg) {
+            toBe(arg: any) {
                 if (self.param === arg) error(`expect(${self.param}).not.toBe(${arg})`);
             },
-            toEqual(arg) {
+            toEqual(arg: any) {
                 if (self.deepEqual(self.param, arg)) error(`expect(${self.param}).not.toEqual(${arg})`);
             },
             toBeNull() {
@@ -31,7 +32,7 @@ class Comparator {
         }
     }
 
-    deepEqual(objA, objB, map = new WeakMap()) {
+    deepEqual(objA: any, objB: any, map = new WeakMap()) {
         /**
          * Get it from here
          * https://levelup.gitconnected.com/how-to-get-a-perfect-deep-equal-in-javascript-b849fe30e54f
@@ -94,12 +95,12 @@ class Comparator {
         return true;
     };
 
-    toBe(arg) {
+    toBe(arg: any) {
         if (this.param !== arg) error(`expect(${this.param}).toBe(${arg})`);
     }
 
     // deep equal
-    toEqual(arg) {
+    toEqual(arg: any) {
         if (!this.deepEqual(this.param, arg)) error(`expect(${this.param}).toEqual(${arg})`);
     }
 
@@ -120,7 +121,7 @@ class Comparator {
     }
 }
 
-function error(text) {
+function error(text: string) {
     throw new Error("Test failure: " + text)
 }
 

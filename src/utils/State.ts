@@ -1,4 +1,10 @@
-class State {
+import TestObject from "./TestObject"
+
+class State implements IState {
+    _report: Report
+    _tests: Map<string, TestObject>
+    _groups: Map<string, string[]>
+
     constructor() {
         this._report = {
             tests: {
@@ -7,10 +13,7 @@ class State {
                 fail: 0,
             },
         };
-        /**
-         * @type {Map<string, TestObject>}
-         * @private
-         */
+
         this._tests = new Map;
         this._groups = new Map;
     }
@@ -19,9 +22,6 @@ class State {
         return this._groups;
     }
 
-    /**
-     * @return {Map<string, TestObject>}
-     */
     get tests() {
         return this._tests;
     }
@@ -46,7 +46,7 @@ class State {
         };
     }
 
-    add(name, test) {
+    add(name: string, test: TestObject) {
         this._tests.set(name, test);
     }
 }

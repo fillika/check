@@ -1,12 +1,17 @@
-import StateManager from "./StateManager.js";
-import TestError from "./TestError.js";
+import StateManager from "./StateManager";
+import TestError from "./TestError";
 
-class TestObject {
-    constructor(id, name, callback) {
+class TestObject implements ITestObject {
+    _id: string;
+    _name: string;
+    _result: boolean;
+    _callback: CallbackInTestObject;
+
+    constructor(id: string, name: string, callback: CallbackInTestObject) {
         this._id = id;
-        this._callback = callback;
         this._name = name;
         this._result = false;
+        this._callback = callback;
 
         StateManager.trigger("addTest", this._id);
     }
@@ -20,9 +25,11 @@ class TestObject {
     }
 
     run() {
+        const _self = this;
+
         StateManager.addToReportTotal();
 
-        return new Promise((resolve, reject) => {
+        return new Promise<ITestObject>((resolve, reject) => {
             try {
                 const result = this._callback();
 
@@ -35,13 +42,13 @@ class TestObject {
                                         reject(new TestError(res.reason.message, { stack: res.reason.stack }))
                                         break;
                                     default:
-                                        resolve(name);
+                                        resolve(_self);
                                 }
                             })
                         })
-                        .catch((e) => reject(e))
+                        .catch(reject)
                 } else {
-                    resolve(name)
+                    resolve(_self)
                 }
             } catch (e) {
                 reject(e)
@@ -51,13 +58,11 @@ class TestObject {
                 this._result = true;
                 StateManager.addToReportSuccess();
             })
-            .catch((err) => {
+            .catch(err => {
                 console.error(`Test: "${this._name}"`, err);
                 StateManager.addToReportFail();
             })
-            .then(() => {
-                return this;
-            })
+            .then(() => _self)
     }
 }
 

@@ -1,13 +1,13 @@
-class Observer {
+type callback = (...args: any[]) => void;
+
+class Observer implements IObserver {
+    _observers: Map<string, callback[]>;
+
     constructor() {
         this._observers = new Map;
     }
 
-    /**
-     * @param {string} eventName
-     * @param cb
-     */
-    on(eventName, cb) {
+    on(eventName: string, cb: callback) {
         if (!this._observers.has(eventName)) {
             this._observers.set(eventName, [cb]);
             return;
@@ -20,17 +20,12 @@ class Observer {
     /**
      * todo Пока что сделал удаление всего по ключу, сделать
      *  потом filter для callbacks
-     * @param eventName
      */
-    off(eventName) {
+    off(eventName: string) {
         this._observers.delete(eventName);
     }
 
-    /**
-     * @param {string} eventName
-     * @param args
-     */
-    trigger(eventName, ...args) {
+    trigger(eventName: string, ...args: any[]) {
         const callbacks = this._observers.get(eventName);
 
         if (callbacks) {

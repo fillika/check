@@ -1,7 +1,7 @@
 import test from "./global/test";
-import expect from "./global/expect.js";
-import group from "./global/group.js";
-import StateManager from "./utils/StateManager.js";
+import expect from "./global/expect";
+import group from "./global/group";
+import StateManager from "./utils/StateManager";
 
 window.test = test;
 window.expect = expect;
