@@ -5,7 +5,6 @@
  */
 function createCheckboxes(arrWithTests) {
     return `
-    <div>
         ${arrWithTests.map(test => {
         return `<div style="padding-left: 25px">
                     <input 
@@ -18,8 +17,7 @@ function createCheckboxes(arrWithTests) {
                     <label for="${test.id}">${test.name}</label>
                 </div>
                 `
-    }).join("")}
-    </div>`
+    }).join("")}`
 }
 
 export default createCheckboxes;

@@ -2,7 +2,7 @@ import createResultGroup from "./createResultGroup.js";
 import insertResultToDOM from "./insertResultToDOM.js";
 import renderTestResult from "./renderTestResult.js";
 
-function renderResults(results) {
+function renderResults(results, root) {
     for (const { value } of results) {
         const groupName = value.groupName === null ? "no-group" : value.groupName;
         let target = document.querySelector(`div[data-id="${groupName}"]`);
