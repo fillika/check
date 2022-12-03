@@ -1,7 +1,14 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: {
+        "check-lib": path.resolve(__dirname, 'src', 'index.ts'),
+        renderAPI: './render/index.js',
+    },
+    output: {
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'dist'),
+    },
     module: {
         rules: [
             {
@@ -13,9 +20,5 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
-    },
-    output: {
-        filename: 'main.js',
-        path: path.resolve(__dirname, 'dist'),
     },
 };

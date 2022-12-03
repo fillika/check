@@ -12,20 +12,25 @@
 
 <h1>Tests</h1>
 
-<div id="test-form">
-    <div class="test-list" id="test-ui">
+<div class="test-form" id="test-form">
+    <div class="test-list" id="test-ui"></div>
 
+    <div class="panel" id="panel">
+        <div class="start-button-wrapper">
+            <button class="start-button" id="start-button">Запуск тестов</button>
+        </div>
+        <div id="report">
 
+        </div>
     </div>
-
-    <button id="start-button">Запуск тестов</button>
 </div>
 
 <div id="root">
 
 </div>
 
-<script src="./dist/main.js"></script>
+<script src="./dist/check-lib.js"></script>
+<script src="./dist/renderAPI.js"></script>
 <script type="module" src="./tests"></script>
 <script type="module" src="main.js"></script>
 </body>
