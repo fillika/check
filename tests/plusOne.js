@@ -73,6 +73,10 @@ group(
 group(
     "Test [plusOne] function with ERROR",
     () => {
+        test("Doesn't exist", () => {
+            funcDoesntExist();
+        })
+
         test("Incorrect test", () => {
             const int = 1,
                 result = plusOne(int);
