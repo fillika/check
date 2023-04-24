@@ -1,8 +1,13 @@
 function createStatisticBillboard(success, fail, total) {
-    const wrapper = document.createElement("div"),
-        totalDiv = document.createElement("div"),
-        successDiv = document.createElement("div"),
-        failDiv = document.createElement("div");
+    const wrapper = document.createElement(`div`);
+    const totalDiv = document.createElement("div");
+    const successDiv = document.createElement("div");
+    const failDiv = document.createElement("div");
+
+    wrapper.classList.add("statistic-billboard");
+    totalDiv.classList.add("total");
+    successDiv.classList.add("success");
+    fail > 0 && failDiv.classList.add("fail");
 
     wrapper.insertAdjacentElement("afterbegin", failDiv)
     wrapper.insertAdjacentElement("afterbegin", successDiv)
@@ -11,8 +16,6 @@ function createStatisticBillboard(success, fail, total) {
     totalDiv.innerText = `Total: ${total}`;
     successDiv.innerText = `Success: ${success}`;
     failDiv.innerText = `Fail: ${fail}`;
-
-    wrapper.style.cssText = "background-color: #d7d7f7; padding: 8px;";
 
     return wrapper;
 }
