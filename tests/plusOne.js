@@ -1,4 +1,10 @@
-import { plusOne } from "../functions";
+/**
+ * @param {number} int
+ * @return {*}
+ */
+function plusOne(int) {
+    return int + 1;
+}
 
 test("Alone test without group", () => {
     const int = 1,
@@ -18,9 +24,9 @@ test("Another alone test without group", () => {
 
 test("Test with object as argument", () => {
     const a = {
-            user: "John",
-            age: 25,
-        },
+        user: "John",
+        age: 25,
+    },
         b = {
             user: "Doe",
             age: 24,
@@ -121,3 +127,49 @@ group(
         })
     },
 )
+
+group("Test with group inside", () => {
+    group("Test children 1", () => {
+        test("Foo", () => {})
+        test("Bar", () => {})
+
+        group("Test children 2", () => {
+            test("John", () => {
+                expect(2).toBe(2)
+            })
+
+            test("Dina", () => {
+                expect(2).toBe(2)
+            })
+
+            test("Castle", () => {
+                expect(2).toBe(2)
+            })
+        })
+    })
+
+    test("Doe", () => {})
+})
+
+group("Test with group inside", () => {
+    group("Test children 22", () => {
+        test("Foo", () => {})
+        test("Bar", () => {})
+
+        group("Test children 32", () => {
+            test("John", () => {
+                expect(2).toBe(2)
+            })
+
+            test("Dina", () => {
+                expect(2).toBe(2)
+            })
+
+            test("Castle", () => {
+                expect(2).toBe(2)
+            })
+        })
+    })
+
+    test("Doe 2", () => {})
+})

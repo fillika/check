@@ -1,37 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unit tests</title>
+    <link rel="stylesheet" href="./assets/index.css">
 </head>
+
 <body>
+    <div id="app"></div>
 
-<h1>Tests</h1>
-
-<div class="test-form" id="test-form">
-    <div class="test-list" id="test-ui"></div>
-
-    <div class="panel" id="panel">
-        <div class="start-button-wrapper">
-            <button class="start-button" id="start-button">Запуск тестов</button>
-        </div>
-        <div id="report">
-
-        </div>
-    </div>
-</div>
-
-<div id="root">
-
-</div>
-
-<script src="./dist/check-lib.js"></script>
-<script src="./dist/renderAPI.js"></script>
-<script type="module" src="./tests"></script>
-<script type="module" src="main.js"></script>
+    <script src="dist/check-lib.js"></script>
+    <script type="module" src="tests/plusOne.js"></script>
+    <!-- UI lib. Always last -->
+    <script type="module" crossorigin src="./assets/index.js"></script>
 </body>
+
 </html>

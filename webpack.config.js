@@ -3,7 +3,6 @@ const path = require('path');
 module.exports = {
     entry: {
         "check-lib": path.resolve(__dirname, 'src', 'index.ts'),
-        renderAPI: './render/index.js',
     },
     output: {
         filename: '[name].js',
