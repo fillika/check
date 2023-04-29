@@ -4,8 +4,8 @@ import TestObject from "../utils/TestObject";
 let testCounter = 0;
 
 function test(name: string, cb: () => void): void {
-    const ID = "Test number is_" + testCounter,
-        testObj = new TestObject(ID, name, cb);
+    const ID = "Test number is_" + testCounter;
+    const testObj = new TestObject(ID, name, cb);
 
     StateManager.addTest(ID, testObj);
 

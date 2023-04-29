@@ -18,6 +18,10 @@ class TestObject implements ITestObject {
         StateManager.trigger("addTest", this._id, this);
     }
 
+    get id() {
+        return this._id;
+    }
+
     get name() {
         return this._name;
     }

@@ -21,5 +21,5 @@ interface IState {
         fail(): void;
     }
 
-    add: (name: string, test: ITestObject) => void
+    add: (id: TestID, test: ITestObject) => void
 }

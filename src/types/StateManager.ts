@@ -1,8 +1,6 @@
 interface IStateManager {
     getTestByID(id: string): ITestObject;
 
-    getTestsGroup(): Map<string, string[]>;
-
     setTestToTheGroup(groupName: string, testID: string): void;
 
     getReport(): Report;
@@ -16,4 +14,6 @@ interface IStateManager {
     addToReportTotal(): void;
 
     addToReportFail(): void;
+
+    pushParentGroup(groupName: string, g: Group): void;
 }
