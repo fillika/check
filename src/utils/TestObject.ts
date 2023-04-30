@@ -66,7 +66,8 @@ class TestObject implements ITestObject {
                     resolve(_self)
                 }
             } catch (e) {
-                reject(e)
+                const err = new TestError(e.message, { stack: e.stack });
+                reject(err)
             }
         })
             .then(() => {
